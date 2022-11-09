@@ -30,12 +30,14 @@ class DatabaseOperation():
     # Method for creating connection arguments
     def createConnectionArgumentDict(self, database, role, pwd, host='localhost', port='5432'):
         """Creates a dictionary from connection arguments
+
         Args:
             database (str): Database name
             role (str): Role ie. username
             pwd (str): Password
             host (str, optional): Server name or IP address. Defaults to 'localhost'.
             port (str, optional): Server's TCP port. Defaults to '5432'.
+        
         Returns:
             dict: Connection arguments as key-value-pairs
         """
@@ -51,9 +53,10 @@ class DatabaseOperation():
     # Method for saving connection arguments to a settings file
     def saveDatabaseSettingsToFile(self, file, connectionArgs):
         """Saves connection arguments to JSON based settings file
+
         Args:
             file (str): Name of the JSON settings file
-            connectionArgs (dict): Connection arguments in key-value-pairs
+            connectionArgs (dict): Connection arguments in key-value pairs
         """
         settingsFile = open(file, 'w')
         json.dump(connectionArgs, settingsFile)
@@ -62,8 +65,10 @@ class DatabaseOperation():
     # Method for reading connection arguments from the settings file
     def readDatabaseSettingsFromFile(self, file):
         """Reads connection arguments from JSON based settings file
+
         Args:
             file (str): Name of the settings file
+        
         Returns:
             dict: Connection arguments in key-value-pairs
         """
@@ -75,8 +80,9 @@ class DatabaseOperation():
     # Method to get all rows from a given table
     def getAllRowsFromTable(self, connectionArgs, table):
         """Selects all rows from the table
+
         Args:
-            connectionArgs (dict): Connection arguments in key-value-pairs
+            connectionArgs (dict): Connection arguments in key-value pairs
             table (str): Name of the table to read from
         """
         server = connectionArgs['server']
@@ -120,10 +126,12 @@ class DatabaseOperation():
             if self.errorCode == 0:
                 dbconnection.close()
 
+    # TODO: Finish writing metods for insert, update and delete
     # Method to insert a row to a given table
 
     def insertRowToTable(self, connectionArgs, sqlClause):
         """Inserts a row to table according to a SQL clause
+
         Args:
             connectionArgs (dict): Connection arguments in key-value-pairs
             sqlClause (str): Insert clause
@@ -134,6 +142,7 @@ class DatabaseOperation():
     # Method to update a table
     def updateTable(self, connectionArgs, table, column, limit):
         """Updates a table
+
         Args:
             connectionArgs (dict): Connection arguments in key-value-pairs
             table (str): Table name
@@ -145,6 +154,7 @@ class DatabaseOperation():
     # Method to delete a row from table
     def deleteFromTable(self, connectionArgs, table, limit):
         """Delete rows from a table using limiting SQL statement
+
         Args:
             connectionArgs (dict): Connection arguments in key-value-pairs
             table (str): Table name
@@ -163,6 +173,9 @@ if __name__ == "__main__":
     '''
     print(dictionary)
     '''
+    
+    # FIXME: Correct the line above
+
     # Save those settings to file
     testOperation.saveDatabaseSettingsToFile('settings.dat', dictionary)
 
