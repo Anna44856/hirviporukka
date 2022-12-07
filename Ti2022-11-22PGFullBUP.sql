@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.2
--- Dumped by pg_dump version 14.2
+-- Dumped from database version 14.5
+-- Dumped by pg_dump version 14.5
 
--- Started on 2022-12-07 09:56:56
+-- Started on 2022-11-22 15:34:04
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +19,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 238 (class 1255 OID 36178)
+-- TOC entry 242 (class 1255 OID 27618)
 -- Name: add_jakoryhma(integer, character varying); Type: PROCEDURE; Schema: public; Owner: -
 --
 
@@ -33,7 +33,7 @@ $$;
 SET default_table_access_method = heap;
 
 --
--- TOC entry 209 (class 1259 OID 36179)
+-- TOC entry 209 (class 1259 OID 27619)
 -- Name: jasen; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -48,7 +48,7 @@ CREATE TABLE public.jasen (
 
 
 --
--- TOC entry 3468 (class 0 OID 0)
+-- TOC entry 3488 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: TABLE jasen; Type: COMMENT; Schema: public; Owner: -
 --
@@ -57,7 +57,7 @@ COMMENT ON TABLE public.jasen IS 'Henkil� joka osallistuu mets�stykseen tai 
 
 
 --
--- TOC entry 237 (class 1255 OID 36182)
+-- TOC entry 241 (class 1255 OID 27622)
 -- Name: get_member(integer); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -69,7 +69,7 @@ $$;
 
 
 --
--- TOC entry 210 (class 1259 OID 36183)
+-- TOC entry 210 (class 1259 OID 27623)
 -- Name: aikuinenvasa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -79,7 +79,7 @@ CREATE TABLE public.aikuinenvasa (
 
 
 --
--- TOC entry 211 (class 1259 OID 36186)
+-- TOC entry 211 (class 1259 OID 27626)
 -- Name: elain; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -89,7 +89,7 @@ CREATE TABLE public.elain (
 
 
 --
--- TOC entry 212 (class 1259 OID 36189)
+-- TOC entry 212 (class 1259 OID 27629)
 -- Name: jakoryhma; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -101,7 +101,7 @@ CREATE TABLE public.jakoryhma (
 
 
 --
--- TOC entry 3469 (class 0 OID 0)
+-- TOC entry 3489 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: TABLE jakoryhma; Type: COMMENT; Schema: public; Owner: -
 --
@@ -110,7 +110,7 @@ COMMENT ON TABLE public.jakoryhma IS 'Ryhm�, jolle lihaa jaetaan';
 
 
 --
--- TOC entry 213 (class 1259 OID 36192)
+-- TOC entry 213 (class 1259 OID 27632)
 -- Name: jakotapahtuma; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -125,7 +125,7 @@ CREATE TABLE public.jakotapahtuma (
 
 
 --
--- TOC entry 3470 (class 0 OID 0)
+-- TOC entry 3490 (class 0 OID 0)
 -- Dependencies: 213
 -- Name: COLUMN jakotapahtuma.maara; Type: COMMENT; Schema: public; Owner: -
 --
@@ -134,7 +134,7 @@ COMMENT ON COLUMN public.jakotapahtuma.maara IS 'Jaettu liham��r� kiloina'
 
 
 --
--- TOC entry 214 (class 1259 OID 36195)
+-- TOC entry 214 (class 1259 OID 27635)
 -- Name: jaetut_lihat; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -148,7 +148,17 @@ CREATE VIEW public.jaetut_lihat AS
 
 
 --
--- TOC entry 215 (class 1259 OID 36199)
+-- TOC entry 215 (class 1259 OID 27639)
+-- Name: jako_ka; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.jako_ka AS
+ SELECT avg(jaetut_lihat.kg) AS liha_ka
+   FROM public.jaetut_lihat;
+
+
+--
+-- TOC entry 216 (class 1259 OID 27643)
 -- Name: jakoryhma_ryhma_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -161,8 +171,8 @@ CREATE SEQUENCE public.jakoryhma_ryhma_id_seq
 
 
 --
--- TOC entry 3471 (class 0 OID 0)
--- Dependencies: 215
+-- TOC entry 3491 (class 0 OID 0)
+-- Dependencies: 216
 -- Name: jakoryhma_ryhma_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -170,7 +180,7 @@ ALTER SEQUENCE public.jakoryhma_ryhma_id_seq OWNED BY public.jakoryhma.ryhma_id;
 
 
 --
--- TOC entry 216 (class 1259 OID 36200)
+-- TOC entry 217 (class 1259 OID 27644)
 -- Name: jasenyys; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -185,8 +195,8 @@ CREATE TABLE public.jasenyys (
 
 
 --
--- TOC entry 3472 (class 0 OID 0)
--- Dependencies: 216
+-- TOC entry 3492 (class 0 OID 0)
+-- Dependencies: 217
 -- Name: COLUMN jasenyys.osuus; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -194,7 +204,7 @@ COMMENT ON COLUMN public.jasenyys.osuus IS 'Muuta pakolliseksi (NOT NULL)';
 
 
 --
--- TOC entry 217 (class 1259 OID 36204)
+-- TOC entry 218 (class 1259 OID 27648)
 -- Name: jakoryhma_yhteenveto; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -209,7 +219,7 @@ CREATE VIEW public.jakoryhma_yhteenveto AS
 
 
 --
--- TOC entry 218 (class 1259 OID 36208)
+-- TOC entry 219 (class 1259 OID 27652)
 -- Name: jakotapahtuma_tapahtuma_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -222,8 +232,8 @@ CREATE SEQUENCE public.jakotapahtuma_tapahtuma_id_seq
 
 
 --
--- TOC entry 3473 (class 0 OID 0)
--- Dependencies: 218
+-- TOC entry 3493 (class 0 OID 0)
+-- Dependencies: 219
 -- Name: jakotapahtuma_tapahtuma_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -231,7 +241,7 @@ ALTER SEQUENCE public.jakotapahtuma_tapahtuma_id_seq OWNED BY public.jakotapahtu
 
 
 --
--- TOC entry 219 (class 1259 OID 36209)
+-- TOC entry 220 (class 1259 OID 27653)
 -- Name: jasen_jasen_id_seq_1; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -244,8 +254,8 @@ CREATE SEQUENCE public.jasen_jasen_id_seq_1
 
 
 --
--- TOC entry 3474 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 3494 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: jasen_jasen_id_seq_1; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -253,7 +263,7 @@ ALTER SEQUENCE public.jasen_jasen_id_seq_1 OWNED BY public.jasen.jasen_id;
 
 
 --
--- TOC entry 220 (class 1259 OID 36210)
+-- TOC entry 221 (class 1259 OID 27654)
 -- Name: jasenyys_jasenyys_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -266,8 +276,8 @@ CREATE SEQUENCE public.jasenyys_jasenyys_id_seq
 
 
 --
--- TOC entry 3475 (class 0 OID 0)
--- Dependencies: 220
+-- TOC entry 3495 (class 0 OID 0)
+-- Dependencies: 221
 -- Name: jasenyys_jasenyys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -275,7 +285,7 @@ ALTER SEQUENCE public.jasenyys_jasenyys_id_seq OWNED BY public.jasenyys.jasenyys
 
 
 --
--- TOC entry 221 (class 1259 OID 36211)
+-- TOC entry 222 (class 1259 OID 27655)
 -- Name: kaato; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -289,13 +299,14 @@ CREATE TABLE public.kaato (
     kasittelyid integer NOT NULL,
     elaimen_nimi character varying(20) NOT NULL,
     sukupuoli character varying(10) NOT NULL,
-    ikaluokka character varying(10) NOT NULL
+    ikaluokka character varying(10) NOT NULL,
+    lisatieto character varying(255)
 );
 
 
 --
--- TOC entry 3476 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 3496 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: TABLE kaato; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -303,8 +314,8 @@ COMMENT ON TABLE public.kaato IS 'Ampumatapahtuman tiedot';
 
 
 --
--- TOC entry 3477 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 3497 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: COLUMN kaato.ruhopaino; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -312,8 +323,8 @@ COMMENT ON COLUMN public.kaato.ruhopaino IS 'paino kiloina';
 
 
 --
--- TOC entry 3478 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 3498 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: COLUMN kaato.paikka_koordinaatti; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -321,7 +332,43 @@ COMMENT ON COLUMN public.kaato.paikka_koordinaatti IS 'T�m�n kent�n tietot
 
 
 --
--- TOC entry 222 (class 1259 OID 36214)
+-- TOC entry 223 (class 1259 OID 27658)
+-- Name: kaadot_ampujittain; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.kaadot_ampujittain AS
+ SELECT (((jasen.etunimi)::text || ' '::text) || (jasen.sukunimi)::text) AS ampuja,
+    kaato.elaimen_nimi AS "el�in",
+    kaato.sukupuoli,
+    kaato.ikaluokka,
+    count(kaato.elaimen_nimi) AS kpl,
+    sum(kaato.ruhopaino) AS kg
+   FROM (public.kaato
+     JOIN public.jasen ON ((jasen.jasen_id = kaato.jasen_id)))
+  GROUP BY (((jasen.etunimi)::text || ' '::text) || (jasen.sukunimi)::text), kaato.elaimen_nimi, kaato.sukupuoli, kaato.ikaluokka
+  ORDER BY (((jasen.etunimi)::text || ' '::text) || (jasen.sukunimi)::text);
+
+
+--
+-- TOC entry 224 (class 1259 OID 27663)
+-- Name: kaadot_ryhmittain; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.kaadot_ryhmittain AS
+ SELECT jakoryhma.ryhman_nimi,
+    kaato.elaimen_nimi,
+    kaato.sukupuoli,
+    kaato.ikaluokka,
+    count(kaato.elaimen_nimi) AS kpl,
+    sum(kaato.ruhopaino) AS kg
+   FROM ((public.jakoryhma
+     JOIN public.jasenyys ON ((jakoryhma.ryhma_id = jasenyys.ryhma_id)))
+     JOIN public.kaato ON ((jasenyys.jasen_id = kaato.jasen_id)))
+  GROUP BY jakoryhma.ryhman_nimi, kaato.elaimen_nimi, kaato.sukupuoli, kaato.ikaluokka;
+
+
+--
+-- TOC entry 225 (class 1259 OID 27668)
 -- Name: kaato_kaato_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -334,8 +381,8 @@ CREATE SEQUENCE public.kaato_kaato_id_seq
 
 
 --
--- TOC entry 3479 (class 0 OID 0)
--- Dependencies: 222
+-- TOC entry 3499 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: kaato_kaato_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -343,7 +390,7 @@ ALTER SEQUENCE public.kaato_kaato_id_seq OWNED BY public.kaato.kaato_id;
 
 
 --
--- TOC entry 223 (class 1259 OID 36215)
+-- TOC entry 227 (class 1259 OID 27673)
 -- Name: kasittely; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -354,7 +401,7 @@ CREATE TABLE public.kasittely (
 
 
 --
--- TOC entry 236 (class 1259 OID 36367)
+-- TOC entry 239 (class 1259 OID 27822)
 -- Name: kaatoluettelo; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -374,7 +421,22 @@ CREATE VIEW public.kaatoluettelo AS
 
 
 --
--- TOC entry 224 (class 1259 OID 36218)
+-- TOC entry 226 (class 1259 OID 27669)
+-- Name: kaatoyhteenveto; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.kaatoyhteenveto AS
+ SELECT kaato.elaimen_nimi,
+    kaato.sukupuoli,
+    kaato.ikaluokka,
+    count(kaato.elaimen_nimi) AS kpl,
+    sum(kaato.ruhopaino) AS kg
+   FROM public.kaato
+  GROUP BY kaato.elaimen_nimi, kaato.sukupuoli, kaato.ikaluokka;
+
+
+--
+-- TOC entry 228 (class 1259 OID 27676)
 -- Name: kasittely_kasittelyid_seq_1; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -387,8 +449,8 @@ CREATE SEQUENCE public.kasittely_kasittelyid_seq_1
 
 
 --
--- TOC entry 3480 (class 0 OID 0)
--- Dependencies: 224
+-- TOC entry 3500 (class 0 OID 0)
+-- Dependencies: 228
 -- Name: kasittely_kasittelyid_seq_1; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -396,7 +458,7 @@ ALTER SEQUENCE public.kasittely_kasittelyid_seq_1 OWNED BY public.kasittely.kasi
 
 
 --
--- TOC entry 225 (class 1259 OID 36219)
+-- TOC entry 229 (class 1259 OID 27677)
 -- Name: lupa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -412,8 +474,8 @@ CREATE TABLE public.lupa (
 
 
 --
--- TOC entry 3481 (class 0 OID 0)
--- Dependencies: 225
+-- TOC entry 3501 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: TABLE lupa; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -421,7 +483,7 @@ COMMENT ON TABLE public.lupa IS 'Vuosittaiset kaatoluvat';
 
 
 --
--- TOC entry 226 (class 1259 OID 36222)
+-- TOC entry 230 (class 1259 OID 27680)
 -- Name: lupa_luparivi_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -434,8 +496,8 @@ CREATE SEQUENCE public.lupa_luparivi_id_seq
 
 
 --
--- TOC entry 3482 (class 0 OID 0)
--- Dependencies: 226
+-- TOC entry 3502 (class 0 OID 0)
+-- Dependencies: 230
 -- Name: lupa_luparivi_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -443,7 +505,7 @@ ALTER SEQUENCE public.lupa_luparivi_id_seq OWNED BY public.lupa.luparivi_id;
 
 
 --
--- TOC entry 235 (class 1259 OID 36363)
+-- TOC entry 240 (class 1259 OID 27827)
 -- Name: nimivalinta; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -455,7 +517,7 @@ CREATE VIEW public.nimivalinta AS
 
 
 --
--- TOC entry 227 (class 1259 OID 36223)
+-- TOC entry 231 (class 1259 OID 27681)
 -- Name: ruhonosa; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -465,7 +527,7 @@ CREATE TABLE public.ruhonosa (
 
 
 --
--- TOC entry 228 (class 1259 OID 36226)
+-- TOC entry 232 (class 1259 OID 27684)
 -- Name: ryhmien_osuudet; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -478,7 +540,7 @@ CREATE VIEW public.ryhmien_osuudet AS
 
 
 --
--- TOC entry 229 (class 1259 OID 36230)
+-- TOC entry 233 (class 1259 OID 27688)
 -- Name: seura; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -492,8 +554,8 @@ CREATE TABLE public.seura (
 
 
 --
--- TOC entry 3483 (class 0 OID 0)
--- Dependencies: 229
+-- TOC entry 3503 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: TABLE seura; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -501,7 +563,7 @@ COMMENT ON TABLE public.seura IS 'Mets�stysseuran tiedot';
 
 
 --
--- TOC entry 230 (class 1259 OID 36233)
+-- TOC entry 234 (class 1259 OID 27691)
 -- Name: seura_seura_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -514,8 +576,8 @@ CREATE SEQUENCE public.seura_seura_id_seq
 
 
 --
--- TOC entry 3484 (class 0 OID 0)
--- Dependencies: 230
+-- TOC entry 3504 (class 0 OID 0)
+-- Dependencies: 234
 -- Name: seura_seura_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -523,7 +585,7 @@ ALTER SEQUENCE public.seura_seura_id_seq OWNED BY public.seura.seura_id;
 
 
 --
--- TOC entry 231 (class 1259 OID 36234)
+-- TOC entry 235 (class 1259 OID 27692)
 -- Name: seurue; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -536,8 +598,8 @@ CREATE TABLE public.seurue (
 
 
 --
--- TOC entry 3485 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 3505 (class 0 OID 0)
+-- Dependencies: 235
 -- Name: TABLE seurue; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -546,8 +608,8 @@ COMMENT ON TABLE public.seurue IS 'Mets�styst� harjoittavan seurueen tiedot
 
 
 --
--- TOC entry 3486 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 3506 (class 0 OID 0)
+-- Dependencies: 235
 -- Name: COLUMN seurue.jasen_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -555,7 +617,7 @@ COMMENT ON COLUMN public.seurue.jasen_id IS 'Seurueen johtajan tunniste';
 
 
 --
--- TOC entry 232 (class 1259 OID 36237)
+-- TOC entry 236 (class 1259 OID 27695)
 -- Name: seurue_seurue_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -568,8 +630,8 @@ CREATE SEQUENCE public.seurue_seurue_id_seq
 
 
 --
--- TOC entry 3487 (class 0 OID 0)
--- Dependencies: 232
+-- TOC entry 3507 (class 0 OID 0)
+-- Dependencies: 236
 -- Name: seurue_seurue_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -577,7 +639,7 @@ ALTER SEQUENCE public.seurue_seurue_id_seq OWNED BY public.seurue.seurue_id;
 
 
 --
--- TOC entry 233 (class 1259 OID 36238)
+-- TOC entry 237 (class 1259 OID 27696)
 -- Name: sukupuoli; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -587,7 +649,7 @@ CREATE TABLE public.sukupuoli (
 
 
 --
--- TOC entry 234 (class 1259 OID 36241)
+-- TOC entry 238 (class 1259 OID 27699)
 -- Name: testi_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -600,8 +662,8 @@ CREATE SEQUENCE public.testi_seq
 
 
 --
--- TOC entry 3488 (class 0 OID 0)
--- Dependencies: 234
+-- TOC entry 3508 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: testi_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
@@ -609,7 +671,7 @@ ALTER SEQUENCE public.testi_seq OWNED BY public.jakoryhma.ryhma_id;
 
 
 --
--- TOC entry 3244 (class 2604 OID 36242)
+-- TOC entry 3260 (class 2604 OID 27700)
 -- Name: jakoryhma ryhma_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -617,7 +679,7 @@ ALTER TABLE ONLY public.jakoryhma ALTER COLUMN ryhma_id SET DEFAULT nextval('pub
 
 
 --
--- TOC entry 3245 (class 2604 OID 36243)
+-- TOC entry 3261 (class 2604 OID 27701)
 -- Name: jakotapahtuma tapahtuma_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -625,7 +687,7 @@ ALTER TABLE ONLY public.jakotapahtuma ALTER COLUMN tapahtuma_id SET DEFAULT next
 
 
 --
--- TOC entry 3243 (class 2604 OID 36244)
+-- TOC entry 3259 (class 2604 OID 27702)
 -- Name: jasen jasen_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -633,7 +695,7 @@ ALTER TABLE ONLY public.jasen ALTER COLUMN jasen_id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3247 (class 2604 OID 36245)
+-- TOC entry 3263 (class 2604 OID 27703)
 -- Name: jasenyys jasenyys_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -641,7 +703,7 @@ ALTER TABLE ONLY public.jasenyys ALTER COLUMN jasenyys_id SET DEFAULT nextval('p
 
 
 --
--- TOC entry 3248 (class 2604 OID 36246)
+-- TOC entry 3264 (class 2604 OID 27704)
 -- Name: kaato kaato_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -649,7 +711,7 @@ ALTER TABLE ONLY public.kaato ALTER COLUMN kaato_id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3249 (class 2604 OID 36247)
+-- TOC entry 3265 (class 2604 OID 27705)
 -- Name: kasittely kasittelyid; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -657,7 +719,7 @@ ALTER TABLE ONLY public.kasittely ALTER COLUMN kasittelyid SET DEFAULT nextval('
 
 
 --
--- TOC entry 3250 (class 2604 OID 36248)
+-- TOC entry 3266 (class 2604 OID 27706)
 -- Name: lupa luparivi_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -665,7 +727,7 @@ ALTER TABLE ONLY public.lupa ALTER COLUMN luparivi_id SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3251 (class 2604 OID 36249)
+-- TOC entry 3267 (class 2604 OID 27707)
 -- Name: seura seura_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -673,7 +735,7 @@ ALTER TABLE ONLY public.seura ALTER COLUMN seura_id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3252 (class 2604 OID 36250)
+-- TOC entry 3268 (class 2604 OID 27708)
 -- Name: seurue seurue_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -681,7 +743,7 @@ ALTER TABLE ONLY public.seurue ALTER COLUMN seurue_id SET DEFAULT nextval('publi
 
 
 --
--- TOC entry 3441 (class 0 OID 36183)
+-- TOC entry 3461 (class 0 OID 27623)
 -- Dependencies: 210
 -- Data for Name: aikuinenvasa; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -691,7 +753,7 @@ INSERT INTO public.aikuinenvasa VALUES ('Vasa');
 
 
 --
--- TOC entry 3442 (class 0 OID 36186)
+-- TOC entry 3462 (class 0 OID 27626)
 -- Dependencies: 211
 -- Data for Name: elain; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -701,7 +763,7 @@ INSERT INTO public.elain VALUES ('Valkoh�nt�peura');
 
 
 --
--- TOC entry 3443 (class 0 OID 36189)
+-- TOC entry 3463 (class 0 OID 27629)
 -- Dependencies: 212
 -- Data for Name: jakoryhma; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -714,7 +776,7 @@ INSERT INTO public.jakoryhma VALUES (6, 1, 'Testiryhm�');
 
 
 --
--- TOC entry 3444 (class 0 OID 36192)
+-- TOC entry 3464 (class 0 OID 27632)
 -- Dependencies: 213
 -- Data for Name: jakotapahtuma; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -725,7 +787,7 @@ INSERT INTO public.jakotapahtuma VALUES (3, '2022-10-02', 2, 'Puolikas', 75, NUL
 
 
 --
--- TOC entry 3440 (class 0 OID 36179)
+-- TOC entry 3460 (class 0 OID 27619)
 -- Dependencies: 209
 -- Data for Name: jasen; Type: TABLE DATA; Schema: public; Owner: -
 --
@@ -743,8 +805,8 @@ INSERT INTO public.jasen VALUES (10, 'Kurt', 'Kirves', 'Pohjanperkontie 122', '2
 
 
 --
--- TOC entry 3446 (class 0 OID 36200)
--- Dependencies: 216
+-- TOC entry 3466 (class 0 OID 27644)
+-- Dependencies: 217
 -- Data for Name: jasenyys; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -759,18 +821,19 @@ INSERT INTO public.jasenyys VALUES (9, 3, 9, '2022-01-01', NULL, 50);
 
 
 --
--- TOC entry 3450 (class 0 OID 36211)
--- Dependencies: 221
+-- TOC entry 3470 (class 0 OID 27655)
+-- Dependencies: 222
 -- Data for Name: kaato; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.kaato VALUES (1, 5, '2022-09-28', 250, 'Takapellon etel�p��, Jyrkk�l�', '61.58,21.54', 1, 'Hirvi', 'Uros', 'Aikuinen');
-INSERT INTO public.kaato VALUES (2, 6, '2022-09-28', 200, 'Takapellon etel�p��, Jyrkk�l�', '61.58,21.54', 2, 'Hirvi', 'Naaras', 'Aikuinen');
+INSERT INTO public.kaato VALUES (1, 5, '2022-09-28', 250, 'Takapellon etel�p��, Jyrkk�l�', '61.58,21.54', 1, 'Hirvi', 'Uros', 'Aikuinen', NULL);
+INSERT INTO public.kaato VALUES (2, 6, '2022-09-28', 200, 'Takapellon etel�p��, Jyrkk�l�', '61.58,21.54', 2, 'Hirvi', 'Naaras', 'Aikuinen', NULL);
+INSERT INTO public.kaato VALUES (4, 8, '2022-11-15', 100, 'Raimela', NULL, 2, 'Valkoh�nt�peura', 'Naaras', 'Aikuinen', 'Hiihoo');
 
 
 --
--- TOC entry 3452 (class 0 OID 36215)
--- Dependencies: 223
+-- TOC entry 3472 (class 0 OID 27673)
+-- Dependencies: 227
 -- Data for Name: kasittely; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -781,8 +844,8 @@ INSERT INTO public.kasittely VALUES (4, 'H�vitet��n');
 
 
 --
--- TOC entry 3454 (class 0 OID 36219)
--- Dependencies: 225
+-- TOC entry 3474 (class 0 OID 27677)
+-- Dependencies: 229
 -- Data for Name: lupa; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -794,8 +857,8 @@ INSERT INTO public.lupa VALUES (5, 1, '2022', 'Hirvi', 'Uros', 'Vasa', 20);
 
 
 --
--- TOC entry 3456 (class 0 OID 36223)
--- Dependencies: 227
+-- TOC entry 3476 (class 0 OID 27681)
+-- Dependencies: 231
 -- Data for Name: ruhonosa; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -805,8 +868,8 @@ INSERT INTO public.ruhonosa VALUES ('Nelj�nnes');
 
 
 --
--- TOC entry 3457 (class 0 OID 36230)
--- Dependencies: 229
+-- TOC entry 3477 (class 0 OID 27688)
+-- Dependencies: 233
 -- Data for Name: seura; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -814,8 +877,8 @@ INSERT INTO public.seura VALUES (1, 'Punaiset hatut ja nen�t', 'Keskuskatu 1',
 
 
 --
--- TOC entry 3459 (class 0 OID 36234)
--- Dependencies: 231
+-- TOC entry 3479 (class 0 OID 27692)
+-- Dependencies: 235
 -- Data for Name: seurue; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -824,8 +887,8 @@ INSERT INTO public.seurue VALUES (2, 1, 'Seurue2', 1);
 
 
 --
--- TOC entry 3461 (class 0 OID 36238)
--- Dependencies: 233
+-- TOC entry 3481 (class 0 OID 27696)
+-- Dependencies: 237
 -- Data for Name: sukupuoli; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -834,8 +897,8 @@ INSERT INTO public.sukupuoli VALUES ('Naaras');
 
 
 --
--- TOC entry 3489 (class 0 OID 0)
--- Dependencies: 215
+-- TOC entry 3509 (class 0 OID 0)
+-- Dependencies: 216
 -- Name: jakoryhma_ryhma_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -843,8 +906,8 @@ SELECT pg_catalog.setval('public.jakoryhma_ryhma_id_seq', 6, true);
 
 
 --
--- TOC entry 3490 (class 0 OID 0)
--- Dependencies: 218
+-- TOC entry 3510 (class 0 OID 0)
+-- Dependencies: 219
 -- Name: jakotapahtuma_tapahtuma_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -852,8 +915,8 @@ SELECT pg_catalog.setval('public.jakotapahtuma_tapahtuma_id_seq', 3, true);
 
 
 --
--- TOC entry 3491 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 3511 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: jasen_jasen_id_seq_1; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -861,8 +924,8 @@ SELECT pg_catalog.setval('public.jasen_jasen_id_seq_1', 10, true);
 
 
 --
--- TOC entry 3492 (class 0 OID 0)
--- Dependencies: 220
+-- TOC entry 3512 (class 0 OID 0)
+-- Dependencies: 221
 -- Name: jasenyys_jasenyys_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -870,17 +933,17 @@ SELECT pg_catalog.setval('public.jasenyys_jasenyys_id_seq', 9, true);
 
 
 --
--- TOC entry 3493 (class 0 OID 0)
--- Dependencies: 222
+-- TOC entry 3513 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: kaato_kaato_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.kaato_kaato_id_seq', 2, true);
+SELECT pg_catalog.setval('public.kaato_kaato_id_seq', 4, true);
 
 
 --
--- TOC entry 3494 (class 0 OID 0)
--- Dependencies: 224
+-- TOC entry 3514 (class 0 OID 0)
+-- Dependencies: 228
 -- Name: kasittely_kasittelyid_seq_1; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -888,8 +951,8 @@ SELECT pg_catalog.setval('public.kasittely_kasittelyid_seq_1', 4, true);
 
 
 --
--- TOC entry 3495 (class 0 OID 0)
--- Dependencies: 226
+-- TOC entry 3515 (class 0 OID 0)
+-- Dependencies: 230
 -- Name: lupa_luparivi_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -897,8 +960,8 @@ SELECT pg_catalog.setval('public.lupa_luparivi_id_seq', 5, true);
 
 
 --
--- TOC entry 3496 (class 0 OID 0)
--- Dependencies: 230
+-- TOC entry 3516 (class 0 OID 0)
+-- Dependencies: 234
 -- Name: seura_seura_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -906,8 +969,8 @@ SELECT pg_catalog.setval('public.seura_seura_id_seq', 1, true);
 
 
 --
--- TOC entry 3497 (class 0 OID 0)
--- Dependencies: 232
+-- TOC entry 3517 (class 0 OID 0)
+-- Dependencies: 236
 -- Name: seurue_seurue_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -915,8 +978,8 @@ SELECT pg_catalog.setval('public.seurue_seurue_id_seq', 2, true);
 
 
 --
--- TOC entry 3498 (class 0 OID 0)
--- Dependencies: 234
+-- TOC entry 3518 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: testi_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -924,7 +987,7 @@ SELECT pg_catalog.setval('public.testi_seq', 1, false);
 
 
 --
--- TOC entry 3256 (class 2606 OID 36252)
+-- TOC entry 3272 (class 2606 OID 27710)
 -- Name: aikuinenvasa aikuinenvasa_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -933,7 +996,7 @@ ALTER TABLE ONLY public.aikuinenvasa
 
 
 --
--- TOC entry 3258 (class 2606 OID 36254)
+-- TOC entry 3274 (class 2606 OID 27712)
 -- Name: elain elain_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -942,7 +1005,7 @@ ALTER TABLE ONLY public.elain
 
 
 --
--- TOC entry 3260 (class 2606 OID 36256)
+-- TOC entry 3276 (class 2606 OID 27714)
 -- Name: jakoryhma jakoryhma_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -951,7 +1014,7 @@ ALTER TABLE ONLY public.jakoryhma
 
 
 --
--- TOC entry 3262 (class 2606 OID 36258)
+-- TOC entry 3278 (class 2606 OID 27716)
 -- Name: jakotapahtuma jakotapahtuma_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -960,7 +1023,7 @@ ALTER TABLE ONLY public.jakotapahtuma
 
 
 --
--- TOC entry 3254 (class 2606 OID 36260)
+-- TOC entry 3270 (class 2606 OID 27718)
 -- Name: jasen jasen_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -969,7 +1032,7 @@ ALTER TABLE ONLY public.jasen
 
 
 --
--- TOC entry 3264 (class 2606 OID 36262)
+-- TOC entry 3280 (class 2606 OID 27720)
 -- Name: jasenyys jasenyys_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -978,7 +1041,7 @@ ALTER TABLE ONLY public.jasenyys
 
 
 --
--- TOC entry 3266 (class 2606 OID 36264)
+-- TOC entry 3282 (class 2606 OID 27722)
 -- Name: kaato kaato_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -987,7 +1050,7 @@ ALTER TABLE ONLY public.kaato
 
 
 --
--- TOC entry 3268 (class 2606 OID 36266)
+-- TOC entry 3284 (class 2606 OID 27724)
 -- Name: kasittely kasittely_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -996,7 +1059,7 @@ ALTER TABLE ONLY public.kasittely
 
 
 --
--- TOC entry 3270 (class 2606 OID 36268)
+-- TOC entry 3286 (class 2606 OID 27726)
 -- Name: lupa lupa_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1005,7 +1068,7 @@ ALTER TABLE ONLY public.lupa
 
 
 --
--- TOC entry 3272 (class 2606 OID 36270)
+-- TOC entry 3288 (class 2606 OID 27728)
 -- Name: ruhonosa ruhonosa_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1014,7 +1077,7 @@ ALTER TABLE ONLY public.ruhonosa
 
 
 --
--- TOC entry 3274 (class 2606 OID 36272)
+-- TOC entry 3290 (class 2606 OID 27730)
 -- Name: seura seura_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1023,7 +1086,7 @@ ALTER TABLE ONLY public.seura
 
 
 --
--- TOC entry 3276 (class 2606 OID 36274)
+-- TOC entry 3292 (class 2606 OID 27732)
 -- Name: seurue seurue_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1032,7 +1095,7 @@ ALTER TABLE ONLY public.seurue
 
 
 --
--- TOC entry 3278 (class 2606 OID 36276)
+-- TOC entry 3294 (class 2606 OID 27734)
 -- Name: sukupuoli sukupuoli_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1041,7 +1104,7 @@ ALTER TABLE ONLY public.sukupuoli
 
 
 --
--- TOC entry 3285 (class 2606 OID 36277)
+-- TOC entry 3301 (class 2606 OID 27735)
 -- Name: kaato aikuinen_vasa_kaato_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1050,7 +1113,7 @@ ALTER TABLE ONLY public.kaato
 
 
 --
--- TOC entry 3290 (class 2606 OID 36282)
+-- TOC entry 3306 (class 2606 OID 27740)
 -- Name: lupa aikuinen_vasa_lupa_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1059,7 +1122,7 @@ ALTER TABLE ONLY public.lupa
 
 
 --
--- TOC entry 3286 (class 2606 OID 36287)
+-- TOC entry 3302 (class 2606 OID 27745)
 -- Name: kaato elain_kaato_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1068,7 +1131,7 @@ ALTER TABLE ONLY public.kaato
 
 
 --
--- TOC entry 3291 (class 2606 OID 36292)
+-- TOC entry 3307 (class 2606 OID 27750)
 -- Name: lupa elain_lupa_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1077,7 +1140,7 @@ ALTER TABLE ONLY public.lupa
 
 
 --
--- TOC entry 3283 (class 2606 OID 36297)
+-- TOC entry 3299 (class 2606 OID 27755)
 -- Name: jasenyys jasen_jasenyys_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1086,7 +1149,7 @@ ALTER TABLE ONLY public.jasenyys
 
 
 --
--- TOC entry 3287 (class 2606 OID 36302)
+-- TOC entry 3303 (class 2606 OID 27760)
 -- Name: kaato jasen_kaato_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1095,7 +1158,7 @@ ALTER TABLE ONLY public.kaato
 
 
 --
--- TOC entry 3294 (class 2606 OID 36307)
+-- TOC entry 3310 (class 2606 OID 27765)
 -- Name: seurue jasen_seurue_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1104,7 +1167,7 @@ ALTER TABLE ONLY public.seurue
 
 
 --
--- TOC entry 3280 (class 2606 OID 36312)
+-- TOC entry 3296 (class 2606 OID 27770)
 -- Name: jakotapahtuma kaato_jakotapahtuma_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1113,7 +1176,7 @@ ALTER TABLE ONLY public.jakotapahtuma
 
 
 --
--- TOC entry 3288 (class 2606 OID 36317)
+-- TOC entry 3304 (class 2606 OID 27775)
 -- Name: kaato kasittely_kaato_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1122,7 +1185,7 @@ ALTER TABLE ONLY public.kaato
 
 
 --
--- TOC entry 3281 (class 2606 OID 36322)
+-- TOC entry 3297 (class 2606 OID 27780)
 -- Name: jakotapahtuma ruhonosa_jakotapahtuma_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1131,7 +1194,7 @@ ALTER TABLE ONLY public.jakotapahtuma
 
 
 --
--- TOC entry 3282 (class 2606 OID 36327)
+-- TOC entry 3298 (class 2606 OID 27785)
 -- Name: jakotapahtuma ryhma_jakotapahtuma_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1140,7 +1203,7 @@ ALTER TABLE ONLY public.jakotapahtuma
 
 
 --
--- TOC entry 3284 (class 2606 OID 36332)
+-- TOC entry 3300 (class 2606 OID 27790)
 -- Name: jasenyys ryhma_jasenyys_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1149,7 +1212,7 @@ ALTER TABLE ONLY public.jasenyys
 
 
 --
--- TOC entry 3292 (class 2606 OID 36337)
+-- TOC entry 3308 (class 2606 OID 27795)
 -- Name: lupa seura_lupa_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1158,7 +1221,7 @@ ALTER TABLE ONLY public.lupa
 
 
 --
--- TOC entry 3295 (class 2606 OID 36342)
+-- TOC entry 3311 (class 2606 OID 27800)
 -- Name: seurue seura_seurue_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1167,7 +1230,7 @@ ALTER TABLE ONLY public.seurue
 
 
 --
--- TOC entry 3279 (class 2606 OID 36347)
+-- TOC entry 3295 (class 2606 OID 27805)
 -- Name: jakoryhma seurue_ryhma_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1176,7 +1239,7 @@ ALTER TABLE ONLY public.jakoryhma
 
 
 --
--- TOC entry 3289 (class 2606 OID 36352)
+-- TOC entry 3305 (class 2606 OID 27810)
 -- Name: kaato sukupuoli_kaato_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1185,7 +1248,7 @@ ALTER TABLE ONLY public.kaato
 
 
 --
--- TOC entry 3293 (class 2606 OID 36357)
+-- TOC entry 3309 (class 2606 OID 27815)
 -- Name: lupa sukupuoli_lupa_fk; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1193,9 +1256,8 @@ ALTER TABLE ONLY public.lupa
     ADD CONSTRAINT sukupuoli_lupa_fk FOREIGN KEY (sukupuoli) REFERENCES public.sukupuoli(sukupuoli);
 
 
--- Completed on 2022-12-07 09:56:57
+-- Completed on 2022-11-22 15:34:05
 
 --
 -- PostgreSQL database dump complete
 --
-
