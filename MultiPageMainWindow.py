@@ -146,10 +146,10 @@ class MultiPageMainWindow(QMainWindow):
             self.connectionArguments, 'public.jakoryhma_yhteenveto')
 
         #figure = figures.createSankeyChart()
-        figure = figures.testChart()
-        htmlFile = 'meatstreams.html'
+        # figure = figures.createSankeyChart()
+        # figure = figures.testChart()
         urlString = f'file:///{htmlFile}'
-        figures.createOfflineFile(figure, htmlFile) # Write the chart to a html file
+        # figures.createOfflineFile(figure, htmlFile) # Write the chart to a html file
         url = QUrl(urlString) # Create a relative url to the file
         self.sankeyWebV.load(url) # Load it into the web view element
 
