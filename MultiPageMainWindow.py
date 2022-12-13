@@ -13,6 +13,7 @@ from datetime import date
 import pgModule
 import prepareData
 import figures
+import dialogs
 
 # CLASS DEFINITIONS FOR THE APP
 # ==============================
